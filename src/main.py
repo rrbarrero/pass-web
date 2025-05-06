@@ -1,8 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from config import Environment, settings
+from web.entrypoints import api_router
 
 app = FastAPI(title="PassWeb")
+app.include_router(api_router, prefix="")
 
 app.add_middleware(
     CORSMiddleware,
