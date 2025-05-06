@@ -22,7 +22,7 @@ jobs:
           docker build -t webpass-test -f ops/containers/be/Dockerfile .
 
       - name: Fix permissions on mounted volume
-        run: sudo chown -R 1000:1000 
+        run: sudo chown -R 1000:1000 .
 
       - name: Run tests in container
         run: |
