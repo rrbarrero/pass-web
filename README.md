@@ -28,6 +28,16 @@ WebPass is designed to be easily extensible:
 
 * You can select the desired theme on frontend/.dev and rebuild frontend container. Work in progress to do it from the UI.
 
+## 📁 Host Requirements
+
+Before running WebPass, ensure the following are properly set up on the host machine:
+
+- A cloned repository of your personal `pass` store (e.g., `~/.password-store`).
+- The corresponding **GPG keys** must already be available.
+- The `docker-compose` service mounts these directories **as read-only**, meaning your data remains untouched and secure by design.
+
+These requirements are critical for WebPass to function correctly, as it relies on the host’s `pass` and GPG environment to operate securely.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -39,7 +49,7 @@ WebPass is designed to be easily extensible:
 ### Installation & Run
 
 ```bash
-curl -sSL https://yourdomain.com/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/rrbarrero/pass-web/main/ops/install.sh | bash
 ```
 
 🧪 Development Status
