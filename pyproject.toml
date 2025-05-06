@@ -1,0 +1,28 @@
+[project]
+name = "pass-web"
+version = "0.1.0"
+description = "Web interface for pass"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.12",
+    "passlib[bcrypt]>=1.7.4",
+    "python-gnupg>=0.5.4",
+    "python-jose[cryptography]>=3.4.0",
+    "uvicorn[standard]>=0.34.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+    "pytest-asyncio>=0.26.0",
+    "pytest-cov>=6.0.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = [
+  ".",
+]
+
+[tool.uv]
+package = true

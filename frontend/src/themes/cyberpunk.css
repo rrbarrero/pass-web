@@ -1,0 +1,471 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+
+@keyframes textGlitch {
+
+    0%,
+    100% {
+        text-shadow: 2px 0 var(--glitch-color-1, #ff00ff), -2px 0 var(--glitch-color-2, #00ffff);
+        opacity: 1;
+    }
+
+    48% {
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: skewX(10deg);
+        opacity: 0.5;
+    }
+
+    52% {
+        transform: skewX(0deg);
+        opacity: 1;
+    }
+
+    78% {
+        opacity: 0.8;
+    }
+
+    80% {
+        text-shadow: -2px 0 var(--glitch-color-1, #ff00ff), 2px 0 var(--glitch-color-2, #00ffff);
+        opacity: 0.6;
+    }
+
+    82% {
+        text-shadow: 2px 0 var(--glitch-color-1, #ff00ff), -2px 0 var(--glitch-color-2, #00ffff);
+        opacity: 1;
+    }
+}
+
+@keyframes subtleFlicker {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+}
+
+@keyframes scanline {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: 0 100%;
+    }
+}
+
+@keyframes neonGlow {
+
+    0%,
+    100% {
+        box-shadow: 0 0 5px var(--glow-color, #00ffff), 0 0 10px var(--glow-color, #00ffff), 0 0 15px var(--glow-color, #00ffff);
+    }
+
+    50% {
+        box-shadow: 0 0 8px var(--glow-color, #00ffff), 0 0 15px var(--glow-color, #00ffff), 0 0 25px var(--glow-color, #00ffff);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+:root {
+    --bg-color: #0a0218;
+    --text-color: #e0f2fe;
+    --primary-accent: #fcee09;
+    --secondary-accent: #f400a1;
+    --tertiary-accent: #00f0ff;
+
+    --border-color: var(--tertiary-accent);
+    --input-bg: rgba(13, 2, 33, 0.8);
+    --input-text: #e0f2fe;
+    --button-bg: var(--secondary-accent);
+    --button-text: #ffffff;
+
+    --font-family-ui: 'Orbitron', sans-serif;
+    --font-family-content: 'Ubuntu', sans-serif;
+    --font-family-mono: 'Ubuntu Mono', monospace;
+
+    --glow-color: var(--tertiary-accent);
+    --glitch-color-1: var(--secondary-accent);
+    --glitch-color-2: var(--tertiary-accent);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-ui);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 2%;
+    position: relative;
+    overflow-x: hidden;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(13, 2, 33, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.03));
+    background-size: 100% 4px, 3px 100%;
+    z-index: -1;
+    pointer-events: none;
+    animation: scanline 15s linear infinite;
+}
+
+
+.app-wrapper {
+    width: 100%;
+    max-width: 750px;
+    padding: 25px;
+    box-sizing: border-box;
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.1), inset 0 0 10px rgba(0, 240, 255, 0.05);
+    background-color: rgba(13, 2, 33, 0.5);
+    backdrop-filter: blur(3px);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary-accent);
+    font-weight: 700;
+    font-family: var(--font-family-ui);
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 0 0 5px var(--primary-accent), 0 0 10px rgba(252, 238, 9, 0.5);
+    letter-spacing: 1px;
+}
+
+h2 {
+    animation: textGlitch 5s linear infinite alternate;
+}
+
+
+p,
+div:not(.app-wrapper):not(.home-container):not(.login-container) {
+    color: var(--text-color);
+    font-family: var(--font-family-content);
+    line-height: 1.7;
+}
+
+ul {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 50px;
+}
+
+label {
+    font-weight: 700;
+    font-family: var(--font-family-ui);
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--tertiary-accent);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding-right: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 1px solid var(--border-color);
+    padding: 12px 15px;
+    width: 100%;
+    font-family: var(--font-family-mono);
+    box-sizing: border-box;
+    flex-grow: 1;
+    border-radius: 2px;
+    box-shadow: inset 0 0 8px rgba(0, 240, 255, 0.3);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    outline: none;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-accent);
+    box-shadow: inset 0 0 10px rgba(0, 240, 255, 0.5), 0 0 15px var(--primary-accent);
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 1px solid var(--secondary-accent);
+    padding: 12px 25px;
+    cursor: pointer;
+    font-family: var(--font-family-ui);
+    font-weight: 700;
+    transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.3s ease, transform 0.1s ease;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 5px var(--secondary-accent), 0 0 10px rgba(244, 0, 161, 0.5);
+}
+
+button:hover {
+    opacity: 1;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 10px var(--primary-accent), 0 0 20px rgba(252, 238, 9, 0.7);
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0px);
+    box-shadow: 0 0 5px var(--primary-accent);
+}
+
+button:disabled {
+    background-color: #555;
+    color: #999;
+    border-color: #777;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+
+.login-container {
+    max-width: 450px;
+    margin: 80px auto;
+    padding: 40px;
+    border: 1px solid var(--secondary-accent);
+    border-radius: 0;
+    background-color: rgba(13, 2, 33, 0.7);
+    box-shadow: 0 0 20px rgba(244, 0, 161, 0.4), inset 0 0 15px rgba(244, 0, 161, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.login-container h1 {
+    color: var(--secondary-accent);
+    text-shadow: 0 0 5px var(--secondary-accent), 0 0 10px rgba(244, 0, 161, 0.5);
+    animation: subtleFlicker 3s linear infinite alternate;
+}
+
+
+.file-list-item {
+    font-family: var(--font-family-mono);
+    padding: 10px 15px;
+    color: var(--text-color);
+    border-bottom: 1px dashed rgba(0, 240, 255, 0.3);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    letter-spacing: 0.5px;
+}
+
+.file-list-item:last-child {
+    border-bottom: none;
+}
+
+.file-list-item:hover {
+    background-color: rgba(0, 240, 255, 0.1);
+    color: var(--tertiary-accent);
+    cursor: default;
+}
+
+.home-container {
+    position: relative;
+    width: 100%;
+    padding-top: 50px;
+    box-sizing: border-box;
+}
+
+.logout-button {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    margin: 0;
+    padding: 8px 15px;
+    font-size: 0.9em;
+    z-index: 1000;
+    background-color: var(--primary-accent);
+    color: var(--bg-color);
+    border-color: var(--primary-accent);
+    box-shadow: 0 0 5px var(--primary-accent), 0 0 10px rgba(252, 238, 9, 0.5);
+}
+
+.logout-button:hover {
+    background-color: var(--secondary-accent);
+    color: #fff;
+    border-color: var(--secondary-accent);
+    box-shadow: 0 0 10px var(--secondary-accent), 0 0 20px rgba(244, 0, 161, 0.7);
+}
+
+
+.home-container form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-top: 15vh;
+    margin-bottom: 30px;
+    justify-content: center;
+    border: 1px solid rgba(0, 240, 255, 0.4);
+    padding: 15px;
+    background: rgba(13, 2, 33, 0.4);
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
+}
+
+p[style*="color: red"] {
+    color: var(--secondary-accent) !important;
+    font-family: var(--font-family-mono);
+    border: 1px dashed var(--secondary-accent);
+    padding: 10px;
+    margin-top: 15px;
+    background-color: rgba(244, 0, 161, 0.1);
+    text-align: center;
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it's on top */
+    backdrop-filter: blur(3px);
+    /* Optional blur */
+    animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.modal-container {
+    background-color: var(--bg-color, #222);
+    /* Use theme bg or fallback */
+    color: var(--text-color, #eee);
+    /* Use theme text or fallback */
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color, #555);
+    /* Use theme border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    width: 80%;
+    max-width: 700px;
+    /* Max width */
+    max-height: 80vh;
+    /* Max height */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent content overflow */
+    animation: modalSlideIn 0.3s ease-out forwards;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color, #444);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-family: var(--font-family-ui, sans-serif);
+    /* Use theme UI font */
+    color: var(--primary-accent, #eee);
+    /* Use theme accent */
+    font-size: 1.3em;
+}
+
+.modal-close-button {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--text-color, #eee);
+    padding: 0 5px;
+    line-height: 1;
+    /* Ensure tight fit */
+}
+
+.modal-close-button:hover {
+    color: var(--secondary-accent, #ff00ff);
+    /* Use another theme accent on hover */
+}
+
+.modal-body {
+    overflow-y: auto;
+    /* Allow scrolling for long content */
+    flex-grow: 1;
+    /* Take remaining space */
+}
+
+.modal-content {
+    white-space: pre-wrap;
+    /* Wrap long lines but preserve whitespace */
+    word-wrap: break-word;
+    /* Break long words */
+    font-family: var(--font-family-mono, monospace);
+    /* Use theme mono font */
+    font-size: 0.95em;
+    color: var(--input-text, var(--text-color, #eee));
+    /* Use theme input text color */
+    background-color: var(--input-bg, #111);
+    /* Use theme input bg */
+    padding: 15px;
+    border: 1px solid var(--border-color, #444);
+    border-radius: 3px;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,484 @@
+/* src/themes/theme-retro.css */
+
+/* --- Imports and Variable Definitions --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes subtleFlicker {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    48% {
+        opacity: 0.95;
+    }
+
+    50% {
+        opacity: 0.9;
+    }
+
+    52% {
+        opacity: 0.95;
+    }
+}
+
+:root {
+    /* Core Colors - Inspired by CGA/Monochrome */
+    --bg-color: #000000;
+    /* Black background */
+    --text-color: #00ff00;
+    /* Bright Green text */
+    --primary-accent: #ffff00;
+    /* Bright Yellow */
+    --secondary-accent: #ff00ff;
+    /* Bright Magenta */
+    --tertiary-accent: #00ffff;
+    /* Bright Cyan */
+
+    /* Element Specifics */
+    --border-color: var(--primary-accent);
+    /* Yellow borders */
+    --input-bg: #111111;
+    /* Dark grey input */
+    --input-text: var(--text-color);
+    /* Green text in input */
+    --button-bg: var(--secondary-accent);
+    /* Magenta buttons */
+    --button-text: var(--primary-accent);
+    /* Yellow text on button */
+
+    /* Fonts */
+    --font-family-ui: 'Press Start 2P', cursive;
+    /* Pixel font for UI */
+    --font-family-content: 'VT323', monospace;
+    /* Terminal font for content */
+    --font-family-mono: 'VT323', monospace;
+    /* Terminal font for mono */
+}
+
+/* --- Global Styles & Layout --- */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-family-content);
+    /* Use VT323 as base */
+    font-size: 18px;
+    /* VT323 needs a decent size */
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 3%;
+    position: relative;
+    overflow-x: hidden;
+    /* Add subtle green grid background */
+    background-image:
+        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+    background-size: 20px 20px;
+    /* Size of the grid squares */
+    animation: fadeIn 0.5s linear forwards;
+}
+
+
+.app-wrapper {
+    width: 100%;
+    max-width: 800px;
+    /* Wider for retro feel */
+    padding: 20px;
+    box-sizing: border-box;
+    border: 2px solid var(--border-color);
+    /* Solid yellow border */
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Slightly transparent black */
+    box-shadow: 5px 5px 0px var(--border-color);
+    /* Hard offset shadow */
+}
+
+/* --- Component & Element Styles --- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--primary-accent);
+    /* Yellow titles */
+    font-family: var(--font-family-ui);
+    /* Pixel font */
+    font-size: 1.2em;
+    /* Adjust size for pixel font */
+    text-align: center;
+    margin-bottom: 25px;
+    text-shadow: 2px 2px 0 var(--bg-color);
+    /* Hard shadow */
+    letter-spacing: 1px;
+    animation: subtleFlicker 4s linear infinite alternate;
+}
+
+p,
+div:not(.app-wrapper):not(.home-container):not(.login-container) {
+    color: var(--text-color);
+    font-family: var(--font-family-content);
+    line-height: 1.5;
+    margin-bottom: 1em;
+}
+
+ul {
+    list-style: none;
+    /* Remove default bullets */
+    padding-left: 0;
+    margin-top: 30px;
+    border: 1px dashed var(--tertiary-accent);
+    /* Cyan dashed border */
+    padding: 10px;
+}
+
+label {
+    font-family: var(--font-family-ui);
+    font-size: 0.8em;
+    /* Smaller pixel font for labels */
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: var(--tertiary-accent);
+    /* Cyan labels */
+    text-transform: uppercase;
+    padding-right: 10px;
+}
+
+input[type="text"],
+input[type="password"] {
+    background-color: var(--input-bg);
+    color: var(--input-text);
+    border: 2px solid var(--border-color);
+    /* Thicker yellow border */
+    padding: 8px 10px;
+    width: 100%;
+    font-family: var(--font-family-mono);
+    /* Terminal font */
+    font-size: 1em;
+    box-sizing: border-box;
+    flex-grow: 1;
+    border-radius: 0;
+    /* Sharp corners */
+    outline: none;
+    box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.5);
+    /* Simple inset shadow */
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--secondary-accent);
+    /* Magenta border on focus */
+    color: var(--secondary-accent);
+    /* Magenta text on focus */
+    background-color: #222;
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: 2px solid var(--button-text);
+    /* Yellow border */
+    padding: 8px 15px;
+    cursor: pointer;
+    font-family: var(--font-family-ui);
+    /* Pixel font */
+    font-size: 0.8em;
+    /* Match label size */
+    transition: background-color 0.1s linear, color 0.1s linear;
+    /* Sharp transition */
+    border-radius: 0;
+    /* Sharp corners */
+    flex-shrink: 0;
+    margin: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-transform: uppercase;
+    box-shadow: 3px 3px 0px var(--button-text);
+    /* Hard offset shadow */
+}
+
+button:hover {
+    background-color: var(--button-text);
+    /* Invert: Yellow bg */
+    color: var(--button-bg);
+    /* Invert: Magenta text */
+    border-color: var(--button-bg);
+    /* Magenta border */
+    box-shadow: 3px 3px 0px var(--button-bg);
+    opacity: 1;
+    /* No fade */
+}
+
+button:active {
+    transform: translate(2px, 2px);
+    /* Simulate press */
+    box-shadow: 1px 1px 0px var(--button-bg);
+}
+
+button:disabled {
+    background-color: #333;
+    color: #777;
+    border-color: #777;
+    box-shadow: none;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+
+.login-container {
+    max-width: 500px;
+    margin: 60px auto;
+    padding: 30px;
+    border: 2px solid var(--secondary-accent);
+    /* Magenta border */
+    border-radius: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    /* Darker background */
+    box-shadow: 5px 5px 0px var(--secondary-accent);
+}
+
+.login-container h1 {
+    color: var(--secondary-accent);
+    /* Magenta login title */
+}
+
+
+.file-list-item {
+    font-family: var(--font-family-mono);
+    /* Terminal font */
+    font-size: 0.9em;
+    padding: 5px 0px 5px 15px;
+    /* Padding left */
+    color: var(--text-color);
+    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+    /* Faint green line */
+    position: relative;
+    margin-left: 10px;
+}
+
+.file-list-item::before {
+    content: ">";
+    /* Use > as bullet */
+    position: absolute;
+    left: 0;
+    top: 5px;
+    /* Adjust vertical position */
+    color: var(--primary-accent);
+    /* Yellow bullet */
+    font-weight: bold;
+}
+
+.file-list-item:last-child {
+    border-bottom: none;
+}
+
+.file-list-item:hover {
+    background-color: rgba(0, 255, 0, 0.1);
+    /* Green highlight */
+    color: #fff;
+    /* White text on hover */
+}
+
+/* --- Home Component Layout Styles --- */
+.home-container {
+    position: relative;
+    width: 100%;
+    padding-top: 40px;
+    /* Less padding maybe */
+    box-sizing: border-box;
+}
+
+.logout-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    margin: 0;
+    z-index: 100;
+    /* Make it look like other buttons */
+    background-color: var(--primary-accent);
+    /* Yellow bg */
+    color: var(--bg-color);
+    /* Black text */
+    border: 2px solid var(--bg-color);
+    /* Black border */
+    padding: 8px 15px;
+    font-family: var(--font-family-ui);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    border-radius: 0;
+    box-shadow: 3px 3px 0px var(--bg-color);
+}
+
+.logout-button:hover {
+    background-color: var(--tertiary-accent);
+    /* Cyan on hover */
+    color: var(--bg-color);
+    border-color: var(--bg-color);
+    box-shadow: 3px 3px 0px var(--bg-color);
+}
+
+
+.home-container form {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10vh;
+    /* Lower vertical position */
+    margin-bottom: 30px;
+    justify-content: center;
+    border: 1px dashed var(--tertiary-accent);
+    /* Dashed cyan border */
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.5);
+}
+
+/* Error message style */
+p[style*="color: red"] {
+    color: var(--secondary-accent) !important;
+    /* Magenta errors */
+    font-family: var(--font-family-mono);
+    border: 1px solid var(--secondary-accent);
+    padding: 10px;
+    margin-top: 15px;
+    background-color: rgba(255, 0, 255, 0.1);
+    text-align: left;
+    /* Align left like terminal */
+}
+
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Semi-transparent black */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    /* Ensure it's on top */
+    backdrop-filter: blur(3px);
+    /* Optional blur */
+    animation: modalFadeIn 0.3s ease-out forwards;
+}
+
+.modal-container {
+    background-color: var(--bg-color, #222);
+    /* Use theme bg or fallback */
+    color: var(--text-color, #eee);
+    /* Use theme text or fallback */
+    padding: 25px;
+    border-radius: 5px;
+    border: 1px solid var(--border-color, #555);
+    /* Use theme border */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    width: 80%;
+    max-width: 700px;
+    /* Max width */
+    max-height: 80vh;
+    /* Max height */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    /* Prevent content overflow */
+    animation: modalSlideIn 0.3s ease-out forwards;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color, #444);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.modal-title {
+    margin: 0;
+    font-family: var(--font-family-ui, sans-serif);
+    /* Use theme UI font */
+    color: var(--primary-accent, #eee);
+    /* Use theme accent */
+    font-size: 1.3em;
+}
+
+.modal-close-button {
+    background: none;
+    border: none;
+    font-size: 1.8em;
+    cursor: pointer;
+    color: var(--text-color, #eee);
+    padding: 0 5px;
+    line-height: 1;
+    /* Ensure tight fit */
+}
+
+.modal-close-button:hover {
+    color: var(--secondary-accent, #ff00ff);
+    /* Use another theme accent on hover */
+}
+
+.modal-body {
+    overflow-y: auto;
+    /* Allow scrolling for long content */
+    flex-grow: 1;
+    /* Take remaining space */
+}
+
+.modal-content {
+    white-space: pre-wrap;
+    /* Wrap long lines but preserve whitespace */
+    word-wrap: break-word;
+    /* Break long words */
+    font-family: var(--font-family-mono, monospace);
+    /* Use theme mono font */
+    font-size: 0.95em;
+    color: var(--input-text, var(--text-color, #eee));
+    /* Use theme input text color */
+    background-color: var(--input-bg, #111);
+    /* Use theme input bg */
+    padding: 15px;
+    border: 1px solid var(--border-color, #444);
+    border-radius: 3px;
+}
+
+/* Animations */
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

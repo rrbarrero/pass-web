@@ -1,0 +1,35 @@
+services:
+  backend:
+    env_file: 
+      - .env 
+    container_name: backend
+    image: pass-web/backend
+    build:
+        context: .
+        dockerfile: ops/containers/be/Dockerfile
+    ports:
+      - "8000:8000"
+    volumes:
+      - ~/.password-store:/home/user/.password-store:ro
+      - ~/.gnupg:/tmp/host-gnupg:ro
+      - .:/home/user/app/
+    command: sh -c "uv run src/main.py"
+
+  frontend:
+    container_name: frontend
+    build:
+        context: .
+        dockerfile: ops/containers/fe/Dockerfile
+    ports:
+      - "3000:80"
+  
+  frontend-dev:
+    container_name: frontend-dev
+    build:
+      context: .
+      dockerfile: ops/containers/fe/Dockerfile.dev
+    volumes:
+      - ./frontend:/app
+      - ./frontend/node_modules:/app/node_modules
+    ports:
+      - "3000:3000"
