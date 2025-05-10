@@ -46,7 +46,7 @@ These requirements are critical for WebPass to function correctly, as it relies 
 - `bash`
 - `docker` and `docker-compose`
 
-### Installation & Run (WIP)
+### Installation & Run
 
 ```bash
 curl -sSL https://raw.githubusercontent.com/rrbarrero/pass-web/main/ops/install.sh | bash

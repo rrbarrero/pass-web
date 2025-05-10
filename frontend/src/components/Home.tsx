@@ -3,6 +3,7 @@ import { useAuth } from "../hooks/useAuth";
 import useFileRepository from "../hooks/useFileRepository";
 import Modal from "./Modal";
 import { PassFile } from "../domain/passFile";
+import ThemeSwitcher from "./ThemeSwitcher";
 
 const Home: React.FC = () => {
   const [search, setSearch] = useState<string>("");
@@ -46,6 +47,7 @@ const Home: React.FC = () => {
 
   return (
     <div className="home-container">
+      <ThemeSwitcher />
       {logout && (
         <button onClick={logout} className="logout-button" disabled={isLoading}>
           Close session

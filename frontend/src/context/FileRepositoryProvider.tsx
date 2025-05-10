@@ -4,7 +4,7 @@ import { FileRepositoryContext } from "./FileRepositoryContext";
 import {
   FakeFileRepository,
   FileRepositoryIface,
-} from "../repository/file_repository";
+} from "../repository/fileRepository";
 import { ApiFileRepository } from "../repository/apiFIleRepository";
 
 export const FileRepositoryProvider: React.FC<{ children: ReactNode }> = ({

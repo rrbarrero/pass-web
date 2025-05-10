@@ -4,6 +4,7 @@ import { useAuth } from "./hooks/useAuth";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import { FileRepositoryProvider } from "./context/FileRepositoryProvider";
+import { ThemeRepositoryProvider } from "./context/ThemeRepositoryProvider";
 
 const getThemeClassName = (themeName: string | undefined): string => {
   const defaultThemeClass = "default";
@@ -39,9 +40,11 @@ const AppContent: React.FC = () => {
           <Login />
         </>
       ) : (
-        <FileRepositoryProvider>
-          <Home />
-        </FileRepositoryProvider>
+        <ThemeRepositoryProvider>
+          <FileRepositoryProvider>
+            <Home />
+          </FileRepositoryProvider>
+        </ThemeRepositoryProvider>
       )}
     </div>
   );
