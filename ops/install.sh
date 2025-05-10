@@ -95,7 +95,7 @@ generate_config() {
             echo "$comment" >> "$target_file"
         fi
 
-        read -e -p "$prompt_text" -i "${default_value}" current_value
+        read -e -p "$prompt_text" -i "${default_value}" current_value  < /dev/tty
         current_value="${current_value:-$default_value}"
 
         if [[ "$var_name" == "JWT_SECRET_KEY" && "$current_value" == "GENERATE_ME_"* ]]; then
@@ -127,7 +127,7 @@ generate_config() {
 
     echo "# ADMIN_PASSWORD - Hashed (do not edit directly)" >> "$output_file_backend"
     echo "Enter the PLAIN TEXT password for the admin user. It will be hashed and stored."
-    read -e -p "Plain text password for ADMIN_PASSWORD [${defaults[ADMIN_PASSWORD_PLAIN]}]: " -i "${defaults[ADMIN_PASSWORD_PLAIN]}" admin_plain_pwd
+    read -e -p "Plain text password for ADMIN_PASSWORD [${defaults[ADMIN_PASSWORD_PLAIN]}]: " -i "${defaults[ADMIN_PASSWORD_PLAIN]}" admin_plain_pwd  < /dev/tty
     admin_plain_pwd="${admin_plain_pwd:-${defaults[ADMIN_PASSWORD_PLAIN]}}"
 
     local generate_hash_script="$project_path/ops/generate_hash.sh"
