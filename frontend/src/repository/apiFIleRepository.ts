@@ -1,8 +1,6 @@
-// src/infrastructure/ApiFileRepository.ts (assuming path)
 import { PassFile } from "../domain/passFile";
-import { FileRepositoryIface } from "./file_repository";
+import { FileRepositoryIface } from "./fileRepository";
 
-// Helper function to handle API errors
 async function handleApiError(response: Response): Promise<Error> {
   let errorDetail = response.statusText;
   try {
@@ -51,7 +49,7 @@ export class ApiFileRepository implements FileRepositoryIface {
       throw new Error("Authentication token is required for searching files.");
     }
     if (!fileName || fileName.trim() === "") {
-      return []; // Don't search for empty strings
+      return [];
     }
 
     const url = `${this.apiUrl}/search/${encodeURIComponent(fileName)}`;
@@ -70,15 +68,12 @@ export class ApiFileRepository implements FileRepositoryIface {
         throw await handleApiError(response);
       }
 
-      // FastAPI returns list[dict[str, str]], assume keys are 'fileName' and 'fullPath'
-      // If keys are different (e.g., 'file_name'), adjust mapping here.
       interface SearchResponse {
         fileName: string;
         fullPath: string;
       }
       const data: SearchResponse[] = await response.json();
 
-      // Validate and map the response
       if (!Array.isArray(data)) {
         throw new Error(
           "API Error: Invalid response format received from search endpoint."
@@ -101,7 +96,6 @@ export class ApiFileRepository implements FileRepositoryIface {
         `ApiFileRepository: Error during searchFile for "${fileName}"`,
         err
       );
-      // Re-throw the original error or a generic one
       throw err instanceof Error
         ? err
         : new Error("An unexpected network error occurred during search.");
@@ -129,7 +123,6 @@ export class ApiFileRepository implements FileRepositoryIface {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        // FastAPI expects { "full_path": "string" } based on PassFileData model likely
         body: JSON.stringify(passFile),
       });
 
@@ -137,7 +130,6 @@ export class ApiFileRepository implements FileRepositoryIface {
         throw await handleApiError(response);
       }
 
-      // FastAPI returns { "content": "string" }
       const data = await response.json();
 
       if (typeof data?.content !== "string") {
@@ -152,7 +144,6 @@ export class ApiFileRepository implements FileRepositoryIface {
         `ApiFileRepository: Error during decryptFile for "${passFile}"`,
         err
       );
-      // Re-throw the original error or a generic one
       throw err instanceof Error
         ? err
         : new Error("An unexpected network error occurred during decryption.");
