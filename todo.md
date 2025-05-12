@@ -1,7 +1,7 @@
 - [x] Start fastapi in main depending of a env variable. If dev, with reload. Beacuse will be deployed in prod with docker-compose as well.
 - [x] CI
-- [ ] CD
-- [ ] [ID-N1] Theme selector logic
+- [x] [ID-N1] Theme selector logic
+- [ ] FE tests
 - [x] Add git pull to the install.sh
 - [ ] Pass store refresh mechanism
 - [x] Doker-compose in the install.sh
