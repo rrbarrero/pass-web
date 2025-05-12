@@ -121,7 +121,7 @@ generate_config() {
     mkdir -p "$frontend_dir"
     > "$output_file_frontend"
 
-    prompt_variable "ENVIRONMENT [dev|prod]" "# Can be: dev | prod | testing" "$output_file_backend"
+    prompt_variable "ENVIRONMENT" "# Can be: dev | prod | testing" "$output_file_backend"
     echo "# WEB" >> "$output_file_backend"
     prompt_variable "ADMIN_USERNAME" "" "$output_file_backend"
 
