@@ -1,42 +1,281 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+body {
+  margin: 0;
+  padding: 0;
+  /* Quitado el padding-top para que el app-wrapper lo controle */
+  font-family: var(--font-family-ui);
+  background-color: var(--bg-color-page);
+  color: var(--text-color-body);
+  transition: background-color var(--transition-duration-normal) var(--transition-timing-function),
+    color var(--transition-duration-normal) var(--transition-timing-function);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  /* Para que el app-wrapper pueda tener su propio padding superior */
+}
+
+.app-wrapper {
+  width: 100%;
+  max-width: 700px;
+  /* O define esto como una variable --container-max-width */
+  padding: 20px;
+  /* O var(--spacing-large) */
+  padding-top: 5vh;
+  /* Espacio superior */
+  box-sizing: border-box;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color-headings);
+  /* Usar la variable de color de encabezados */
+  font-weight: var(--font-weight-bold);
+  font-family: var(--font-family-ui);
+  text-align: center;
+  margin-bottom: 20px;
+  /* O var(--spacing-medium) */
+}
+
+p,
+div:not(.modal-overlay):not(.modal-container)
+
+/* Para evitar conflictos con estilos de modal más específicos */
+  {
+  color: var(--text-color-body);
+  font-family: var(--font-family-ui);
+  /* O --font-family-content si es para contenido largo */
+  line-height: var(--line-height-base);
+}
+
+label {
+  font-weight: var(--font-weight-normal);
+  font-family: var(--font-family-ui);
+  white-space: nowrap;
+  flex-shrink: 0;
+  color: var(--text-color-body);
+  /* O un --text-color-label específico */
+}
+
+input[type="text"],
+input[type="password"] {
+  background-color: var(--bg-color-input);
+  color: var(--text-color-input);
+  border: 1px solid var(--border-color-input);
+  padding: 10px;
+  /* O var(--spacing-small) */
+  width: 100%;
+  font-family: var(--font-family-content);
+  box-sizing: border-box;
+  flex-grow: 1;
+  border-radius: var(--border-radius-small);
+  /* Añadido para consistencia */
+}
+
+button,
+.button
+
+/* Clase genérica para elementos que actúen como botón */
+  {
+  background-color: var(--bg-color-button);
+  color: var(--text-color-button);
+  border: 1px solid var(--border-color-button);
+  padding: 10px 20px;
+  /* O var(--spacing-small) var(--spacing-medium) */
+  cursor: pointer;
+  font-family: var(--font-family-ui);
+  font-weight: var(--font-weight-bold);
+  transition: background-color var(--transition-duration-fast) var(--transition-timing-function),
+    opacity var(--transition-duration-fast) var(--transition-timing-function);
+  border-radius: var(--border-radius-small);
+  flex-shrink: 0;
+  margin: 0;
+  display: inline-block;
+  vertical-align: middle;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+button:hover,
+.button:hover {
+  background-color: var(--bg-color-button-hover);
+  /* Usar variable para hover */
+  opacity: 0.9;
+  /* Puedes quitar esto si el cambio de color es suficiente */
 }
 
-@keyframes logo-spin {
+.login-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 30px;
+  /* O var(--spacing-large) */
+  border: 1px solid var(--border-color-default);
+  border-radius: var(--border-radius-default);
+  background-color: var(--bg-color-card);
+  /* Usar bg-color-card */
+  box-shadow: var(--box-shadow-default);
+  /* Añadir una sombra sutil */
+}
+
+.home-container {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.logout-button {
+  position: fixed;
+  /* O absolute si .app-wrapper es el contexto de posicionamiento */
+  top: 15px;
+  /* var(--spacing-medium) */
+  right: 15px;
+  /* var(--spacing-medium) */
+  margin: 0;
+  padding: 6px 12px;
+  font-size: 0.9em;
+  z-index: 100;
+  /* Hereda estilos de botón base */
+}
+
+.home-container form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  /* O var(--spacing-small) */
+  width: 100%;
+  margin-top: 20vh;
+  margin-bottom: 20px;
+  /* O var(--spacing-medium) */
+  justify-content: center;
+}
+
+.home-container ul {
+  list-style: disc;
+  padding-left: 40px;
+  /* O var(--spacing-xl) */
+  margin-top: 50px;
+  /* O var(--spacing-xl) */
+}
+
+.file-list-item {
+  font-family: var(--font-family-content);
+  padding: 5px 0;
+  /* O var(--spacing-xs) 0 */
+  color: var(--text-color-body);
+}
+
+
+/* --- Estilos del Modal --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--modal-overlay-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(var(--modal-backdrop-blur));
+  animation: modalFadeIn var(--transition-duration-normal) var(--transition-timing-function-ease-out) forwards;
+}
+
+.modal-container {
+  background-color: var(--bg-color-card);
+  /* Usar bg-color-card */
+  color: var(--text-color-body);
+  padding: 25px;
+  /* O var(--spacing-large) */
+  border-radius: var(--border-radius-default);
+  border: 1px solid var(--border-color-default);
+  box-shadow: var(--box-shadow-modal);
+  width: 80%;
+  max-width: 700px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: modalSlideIn var(--transition-duration-normal) var(--transition-timing-function-ease-out) forwards;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color-default);
+  padding-bottom: 10px;
+  /* O var(--spacing-small) */
+  margin-bottom: 15px;
+  /* O var(--spacing-medium) */
+}
+
+.modal-title {
+  margin: 0;
+  font-family: var(--font-family-ui);
+  color: var(--text-color-headings);
+  /* Coincide con otros encabezados */
+  font-size: 1.3em;
+}
+
+.modal-close-button {
+  background: none;
+  border: none;
+  font-size: 1.8em;
+  cursor: pointer;
+  color: var(--text-color-body);
+  /* O --text-color-muted */
+  padding: 0 5px;
+  line-height: 1;
+}
+
+.modal-close-button:hover {
+  color: var(--accent-color-secondary);
+  /* Usar acento secundario para hover */
+}
+
+.modal-body {
+  overflow-y: auto;
+  flex-grow: 1;
+}
+
+.modal-content {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  font-family: var(--font-family-mono);
+  /* Usar fuente mono */
+  font-size: 0.95em;
+  color: var(--text-color-input);
+  /* Coincide con el color de texto de input */
+  background-color: var(--bg-color-input);
+  /* Coincide con el fondo de input */
+  padding: 15px;
+  /* O var(--spacing-medium) */
+  border: 1px solid var(--border-color-input);
+  border-radius: var(--border-radius-small);
+}
+
+/* Animaciones (ya estaban bien, no necesitan cambios de variables) */
+@keyframes modalFadeIn {
   from {
-    transform: rotate(0deg);
+    opacity: 0;
   }
+
   to {
-    transform: rotate(360deg);
+    opacity: 1;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
   }
-}
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

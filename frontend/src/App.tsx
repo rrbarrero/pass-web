@@ -4,6 +4,10 @@ import { useAuth } from "./hooks/useAuth";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import { FileRepositoryProvider } from "./context/FileRepositoryProvider";
+import { ThemeRepositoryProvider } from "./context/ThemeRepositoryProvider";
+import "./assets/css/theme-variables.css";
+import "./App.css";
+import ThemeEffectManager from "./components/ThemeManager";
 
 const getThemeClassName = (themeName: string | undefined): string => {
   const defaultThemeClass = "default";
@@ -49,9 +53,12 @@ const AppContent: React.FC = () => {
 
 const App: React.FC = () => {
   return (
-    <AuthProvider>
-      <AppContent />{" "}
-    </AuthProvider>
+    <ThemeRepositoryProvider>
+      <ThemeEffectManager />
+      <AuthProvider>
+        <AppContent />{" "}
+      </AuthProvider>
+    </ThemeRepositoryProvider>
   );
 };
 
