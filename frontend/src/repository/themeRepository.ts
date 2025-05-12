@@ -52,6 +52,4 @@ export class FileThemeRepository implements ThemeRepositoryIface {
   }
 }
 
-new FileThemeRepository().load();
-
 export const themeLoader = true;

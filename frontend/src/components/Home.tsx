@@ -1,4 +1,4 @@
-import React, { useState, FormEvent, useEffect } from "react"; // Import useEffect
+import React, { useState, FormEvent, useEffect } from "react";
 import { useAuth } from "../hooks/useAuth";
 import useFileRepository from "../hooks/useFileRepository";
 import Modal from "./Modal";

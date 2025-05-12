@@ -7,7 +7,7 @@ interface ThemeOption {
 }
 
 const ThemeSwitcher: React.FC = () => {
-  const { currentTheme, setTheme, listAvailableThemes } =
+  const { currentTheme, setAppTheme, listAvailableThemes } =
     useFileThemeRepository();
   const [availableThemes, setAvailableThemes] = useState<ThemeOption[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -49,7 +49,7 @@ const ThemeSwitcher: React.FC = () => {
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const newTheme = event.target.value;
-    setTheme(newTheme);
+    setAppTheme(newTheme);
   };
 
   if (isLoading) {
@@ -80,11 +80,6 @@ const ThemeSwitcher: React.FC = () => {
           </option>
         ))}
       </select>
-      {currentTheme && (
-        <p>
-          Current theme: <strong>{currentTheme}</strong>
-        </p>
-      )}
     </div>
   );
 };

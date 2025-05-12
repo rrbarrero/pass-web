@@ -1,484 +1,588 @@
-/* src/themes/theme-retro.css */
-
-/* --- Imports and Variable Definitions --- */
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap');
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-
-    to {
-        opacity: 1;
-    }
-}
-
-@keyframes subtleFlicker {
-
-    0%,
-    100% {
-        opacity: 1;
-    }
-
-    48% {
-        opacity: 0.95;
-    }
-
-    50% {
-        opacity: 0.9;
-    }
-
-    52% {
-        opacity: 0.95;
-    }
-}
-
-:root {
-    /* Core Colors - Inspired by CGA/Monochrome */
-    --bg-color: #000000;
+html.theme-retro {
+    /* Retro Color Palette (CGA/Monochrome inspired) */
+    --bg-color-page: #000000;
     /* Black background */
-    --text-color: #00ff00;
+    --bg-color-card: rgba(0, 0, 0, 0.75);
+    /* For .login-container, .app-wrapper, modal */
+    --bg-color-input: #111111;
+    /* Dark grey input background */
+    --bg-color-button: #ff00ff;
+    /* Bright Magenta buttons */
+    --bg-color-button-hover: #ffff00;
+    /* Bright Yellow on hover */
+
+    --text-color-body: #00ff00;
     /* Bright Green text */
-    --primary-accent: #ffff00;
+    --text-color-headings: #ffff00;
+    /* Bright Yellow titles */
+    --text-color-input: #00ff00;
+    /* Green text in input */
+    --text-color-button: #ffff00;
+    /* Yellow text on magenta button */
+    --text-color-link: #00ffff;
+    /* Bright Cyan for links */
+    --text-color-link-hover: #ffff00;
+    /* Bright Yellow for links on hover */
+
+    --accent-color-primary: #ffff00;
     /* Bright Yellow */
-    --secondary-accent: #ff00ff;
+    --accent-color-secondary: #ff00ff;
     /* Bright Magenta */
-    --tertiary-accent: #00ffff;
+    /* Add a third accent for cyan if needed, or use --text-color-link */
+    --accent-color-tertiary-retro: #00ffff;
     /* Bright Cyan */
 
-    /* Element Specifics */
-    --border-color: var(--primary-accent);
+    --border-color-default: var(--accent-color-primary);
     /* Yellow borders */
-    --input-bg: #111111;
-    /* Dark grey input */
-    --input-text: var(--text-color);
-    /* Green text in input */
-    --button-bg: var(--secondary-accent);
-    /* Magenta buttons */
-    --button-text: var(--primary-accent);
-    /* Yellow text on button */
+    --border-color-input: var(--accent-color-primary);
+    --border-color-button: var(--accent-color-primary);
+    /* Button border matches its text color */
 
-    /* Fonts */
+    /* Retro Typography */
     --font-family-ui: 'Press Start 2P', cursive;
     /* Pixel font for UI */
     --font-family-content: 'VT323', monospace;
     /* Terminal font for content */
     --font-family-mono: 'VT323', monospace;
     /* Terminal font for mono */
-}
+    --font-size-base: 18px;
+    /* VT323 often needs to be slightly larger */
+    /* --line-height-base: 1.5; */
+    /* Adjust this if needed */
 
-/* --- Global Styles & Layout --- */
-body {
-    margin: 0;
-    padding: 0;
-    font-family: var(--font-family-content);
-    /* Use VT323 as base */
-    font-size: 18px;
-    /* VT323 needs a decent size */
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding-top: 3%;
-    position: relative;
-    overflow-x: hidden;
-    /* Add subtle green grid background */
-    background-image:
-        linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
-    background-size: 20px 20px;
-    /* Size of the grid squares */
-    animation: fadeIn 0.5s linear forwards;
-}
-
-
-.app-wrapper {
-    width: 100%;
-    max-width: 800px;
-    /* Wider for retro feel */
-    padding: 20px;
-    box-sizing: border-box;
-    border: 2px solid var(--border-color);
-    /* Solid yellow border */
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Slightly transparent black */
-    box-shadow: 5px 5px 0px var(--border-color);
-    /* Hard offset shadow */
-}
-
-/* --- Component & Element Styles --- */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    color: var(--primary-accent);
-    /* Yellow titles */
-    font-family: var(--font-family-ui);
-    /* Pixel font */
-    font-size: 1.2em;
-    /* Adjust size for pixel font */
-    text-align: center;
-    margin-bottom: 25px;
-    text-shadow: 2px 2px 0 var(--bg-color);
-    /* Hard shadow */
-    letter-spacing: 1px;
-    animation: subtleFlicker 4s linear infinite alternate;
-}
-
-p,
-div:not(.app-wrapper):not(.home-container):not(.login-container) {
-    color: var(--text-color);
-    font-family: var(--font-family-content);
-    line-height: 1.5;
-    margin-bottom: 1em;
-}
-
-ul {
-    list-style: none;
-    /* Remove default bullets */
-    padding-left: 0;
-    margin-top: 30px;
-    border: 1px dashed var(--tertiary-accent);
-    /* Cyan dashed border */
-    padding: 10px;
-}
-
-label {
-    font-family: var(--font-family-ui);
-    font-size: 0.8em;
-    /* Smaller pixel font for labels */
-    white-space: nowrap;
-    flex-shrink: 0;
-    color: var(--tertiary-accent);
-    /* Cyan labels */
-    text-transform: uppercase;
-    padding-right: 10px;
-}
-
-input[type="text"],
-input[type="password"] {
-    background-color: var(--input-bg);
-    color: var(--input-text);
-    border: 2px solid var(--border-color);
-    /* Thicker yellow border */
-    padding: 8px 10px;
-    width: 100%;
-    font-family: var(--font-family-mono);
-    /* Terminal font */
-    font-size: 1em;
-    box-sizing: border-box;
-    flex-grow: 1;
-    border-radius: 0;
+    /* Retro Borders and Shadows */
+    --border-radius-small: 0px;
     /* Sharp corners */
-    outline: none;
-    box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.5);
-    /* Simple inset shadow */
-}
-
-input[type="text"]:focus,
-input[type="password"]:focus {
-    border-color: var(--secondary-accent);
-    /* Magenta border on focus */
-    color: var(--secondary-accent);
-    /* Magenta text on focus */
-    background-color: #222;
-}
-
-button {
-    background-color: var(--button-bg);
-    color: var(--button-text);
-    border: 2px solid var(--button-text);
-    /* Yellow border */
-    padding: 8px 15px;
-    cursor: pointer;
-    font-family: var(--font-family-ui);
-    /* Pixel font */
-    font-size: 0.8em;
-    /* Match label size */
-    transition: background-color 0.1s linear, color 0.1s linear;
-    /* Sharp transition */
-    border-radius: 0;
+    --border-radius-default: 0px;
     /* Sharp corners */
-    flex-shrink: 0;
-    margin: 0;
-    display: inline-block;
-    vertical-align: middle;
-    text-transform: uppercase;
-    box-shadow: 3px 3px 0px var(--button-text);
+    --box-shadow-default: 5px 5px 0px var(--border-color-default);
     /* Hard offset shadow */
-}
+    --box-shadow-modal: 8px 8px 0px var(--accent-color-secondary);
+    /* Or a different color for modals */
 
-button:hover {
-    background-color: var(--button-text);
-    /* Invert: Yellow bg */
-    color: var(--button-bg);
-    /* Invert: Magenta text */
-    border-color: var(--button-bg);
-    /* Magenta border */
-    box-shadow: 3px 3px 0px var(--button-bg);
-    opacity: 1;
-    /* No fade */
-}
+    /* Transitions (more abrupt for retro look) */
+    --transition-duration-fast: 0.1s;
+    --transition-duration-normal: 0.15s;
+    --transition-timing-function: linear;
+    /* More direct motion */
 
-button:active {
-    transform: translate(2px, 2px);
-    /* Simulate press */
-    box-shadow: 1px 1px 0px var(--button-bg);
-}
-
-button:disabled {
-    background-color: #333;
-    color: #777;
-    border-color: #777;
-    box-shadow: none;
-    cursor: not-allowed;
-    opacity: 0.7;
-}
+    /* Other */
+    --modal-overlay-bg: rgba(0, 0, 0, 0.8);
+    --modal-backdrop-blur: 0px;
+    /* No blur for rawer look */
 
 
-.login-container {
-    max-width: 500px;
-    margin: 60px auto;
-    padding: 30px;
-    border: 2px solid var(--secondary-accent);
-    /* Magenta border */
-    border-radius: 0;
-    background-color: rgba(0, 0, 0, 0.8);
-    /* Darker background */
-    box-shadow: 5px 5px 0px var(--secondary-accent);
-}
+    /* === RETRO THEME SPECIFIC STYLES === */
 
-.login-container h1 {
-    color: var(--secondary-accent);
-    /* Magenta login title */
-}
-
-
-.file-list-item {
-    font-family: var(--font-family-mono);
-    /* Terminal font */
-    font-size: 0.9em;
-    padding: 5px 0px 5px 15px;
-    /* Padding left */
-    color: var(--text-color);
-    border-bottom: 1px solid rgba(0, 255, 0, 0.3);
-    /* Faint green line */
-    position: relative;
-    margin-left: 10px;
-}
-
-.file-list-item::before {
-    content: ">";
-    /* Use > as bullet */
-    position: absolute;
-    left: 0;
-    top: 5px;
-    /* Adjust vertical position */
-    color: var(--primary-accent);
-    /* Yellow bullet */
-    font-weight: bold;
-}
-
-.file-list-item:last-child {
-    border-bottom: none;
-}
-
-.file-list-item:hover {
-    background-color: rgba(0, 255, 0, 0.1);
-    /* Green highlight */
-    color: #fff;
-    /* White text on hover */
-}
-
-/* --- Home Component Layout Styles --- */
-.home-container {
-    position: relative;
-    width: 100%;
-    padding-top: 40px;
-    /* Less padding maybe */
-    box-sizing: border-box;
-}
-
-.logout-button {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    margin: 0;
-    z-index: 100;
-    /* Make it look like other buttons */
-    background-color: var(--primary-accent);
-    /* Yellow bg */
-    color: var(--bg-color);
-    /* Black text */
-    border: 2px solid var(--bg-color);
-    /* Black border */
-    padding: 8px 15px;
-    font-family: var(--font-family-ui);
-    font-size: 0.8em;
-    text-transform: uppercase;
-    border-radius: 0;
-    box-shadow: 3px 3px 0px var(--bg-color);
-}
-
-.logout-button:hover {
-    background-color: var(--tertiary-accent);
-    /* Cyan on hover */
-    color: var(--bg-color);
-    border-color: var(--bg-color);
-    box-shadow: 3px 3px 0px var(--bg-color);
-}
-
-
-.home-container form {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    width: 100%;
-    margin-top: 10vh;
-    /* Lower vertical position */
-    margin-bottom: 30px;
-    justify-content: center;
-    border: 1px dashed var(--tertiary-accent);
-    /* Dashed cyan border */
-    padding: 15px;
-    background: rgba(0, 0, 0, 0.5);
-}
-
-/* Error message style */
-p[style*="color: red"] {
-    color: var(--secondary-accent) !important;
-    /* Magenta errors */
-    font-family: var(--font-family-mono);
-    border: 1px solid var(--secondary-accent);
-    padding: 10px;
-    margin-top: 15px;
-    background-color: rgba(255, 0, 255, 0.1);
-    text-align: left;
-    /* Align left like terminal */
-}
-
-
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    /* Semi-transparent black */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    /* Ensure it's on top */
-    backdrop-filter: blur(3px);
-    /* Optional blur */
-    animation: modalFadeIn 0.3s ease-out forwards;
-}
-
-.modal-container {
-    background-color: var(--bg-color, #222);
-    /* Use theme bg or fallback */
-    color: var(--text-color, #eee);
-    /* Use theme text or fallback */
-    padding: 25px;
-    border-radius: 5px;
-    border: 1px solid var(--border-color, #555);
-    /* Use theme border */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
-    width: 80%;
-    max-width: 700px;
-    /* Max width */
-    max-height: 80vh;
-    /* Max height */
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    /* Prevent content overflow */
-    animation: modalSlideIn 0.3s ease-out forwards;
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid var(--border-color, #444);
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-}
-
-.modal-title {
-    margin: 0;
-    font-family: var(--font-family-ui, sans-serif);
-    /* Use theme UI font */
-    color: var(--primary-accent, #eee);
-    /* Use theme accent */
-    font-size: 1.3em;
-}
-
-.modal-close-button {
-    background: none;
-    border: none;
-    font-size: 1.8em;
-    cursor: pointer;
-    color: var(--text-color, #eee);
-    padding: 0 5px;
-    line-height: 1;
-    /* Ensure tight fit */
-}
-
-.modal-close-button:hover {
-    color: var(--secondary-accent, #ff00ff);
-    /* Use another theme accent on hover */
-}
-
-.modal-body {
-    overflow-y: auto;
-    /* Allow scrolling for long content */
-    flex-grow: 1;
-    /* Take remaining space */
-}
-
-.modal-content {
-    white-space: pre-wrap;
-    /* Wrap long lines but preserve whitespace */
-    word-wrap: break-word;
-    /* Break long words */
-    font-family: var(--font-family-mono, monospace);
-    /* Use theme mono font */
-    font-size: 0.95em;
-    color: var(--input-text, var(--text-color, #eee));
-    /* Use theme input text color */
-    background-color: var(--input-bg, #111);
-    /* Use theme input bg */
-    padding: 15px;
-    border: 1px solid var(--border-color, #444);
-    border-radius: 3px;
-}
-
-/* Animations */
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
+    & body {
+        /* margin, padding, min-height, display, overflow-x already come from theme-variables.css or App.css */
+        font-family: var(--font-family-content);
+        font-size: var(--font-size-base);
+        background-color: var(--bg-color-page);
+        color: var(--text-color-body);
+        /* display: flex; justify-content: center; align-items: flex-start; padding-top: 3%; */
+        /* Control this in the general layout if possible */
+        position: relative;
+        /* Needed for grid pseudo-element */
+        /* Background grid */
+        background-image:
+            linear-gradient(rgba(0, 255, 0, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(0, 255, 0, 0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+        animation: retroFadeIn 0.5s linear forwards;
     }
 
-    to {
-        opacity: 1;
+    /* Main application container */
+    & .app-wrapper {
+        /* Or the class of your main container in App.tsx */
+        width: 100%;
+        max-width: 800px;
+        margin: 3% auto;
+        /* Centered with margin */
+        padding: 20px;
+        box-sizing: border-box;
+        border: 2px solid var(--border-color-default);
+        background-color: var(--bg-color-card);
+        box-shadow: var(--box-shadow-default);
     }
-}
 
-@keyframes modalSlideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-30px);
+    /* Headings */
+    & h1,
+    & h2,
+    & h3,
+    & h4,
+    & h5,
+    & h6 {
+        color: var(--text-color-headings);
+        font-family: var(--font-family-ui);
+        font-size: 1.2em;
+        /* Adjust for pixelated font */
+        text-align: center;
+        margin-bottom: 25px;
+        text-shadow: 2px 2px 0px var(--bg-color-page);
+        /* Hard shadow against page background */
+        letter-spacing: 1px;
+        animation: retroSubtleFlicker 4s linear infinite alternate;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    /* Paragraphs and general text */
+    & p,
+    & div:not(.app-wrapper):not(.home-container):not(.login-container):not(.modal-container):not(.modal-header):not(.modal-body) {
+        color: var(--text-color-body);
+        font-family: var(--font-family-content);
+        line-height: 1.5;
+        /* Adjust for VT323 */
+        margin-bottom: 1em;
+    }
+
+    /* Lists */
+    & ul {
+        list-style: none;
+        padding-left: 0;
+        margin-top: 30px;
+        border: 1px dashed var(--accent-color-tertiary-retro);
+        padding: 10px;
+    }
+
+    /* Labels */
+    & label {
+        font-family: var(--font-family-ui);
+        font-size: 0.8em;
+        white-space: nowrap;
+        flex-shrink: 0;
+        color: var(--accent-color-tertiary-retro);
+        text-transform: uppercase;
+        padding-right: 10px;
+    }
+
+    /* Inputs */
+    & input[type="text"],
+    & input[type="password"] {
+        background-color: var(--bg-color-input);
+        color: var(--text-color-input);
+        border: 2px solid var(--border-color-input);
+        padding: 8px 10px;
+        width: 100%;
+        font-family: var(--font-family-mono);
+        font-size: 1em;
+        /* Or var(--font-size-base) if VT323 looks good */
+        box-sizing: border-box;
+        flex-grow: 1;
+        border-radius: var(--border-radius-small);
+        /* No radius */
+        outline: none;
+        box-shadow: inset 2px 2px 0px rgba(0, 0, 0, 0.5);
+    }
+
+    & input[type="text"]:focus,
+    & input[type="password"]:focus {
+        border-color: var(--accent-color-secondary);
+        /* Magenta border on focus */
+        color: var(--accent-color-secondary);
+        /* Magenta text on focus */
+        background-color: #222222;
+        /* Slightly different background for active input */
+    }
+
+    /* Buttons */
+    & button,
+    & .btn {
+        background-color: var(--bg-color-button);
+        color: var(--text-color-button);
+        border: 2px solid var(--border-color-button);
+        /* Border matches button text */
+        padding: 8px 15px;
+        cursor: pointer;
+        font-family: var(--font-family-ui);
+        font-size: 0.8em;
+        transition: background-color var(--transition-duration-fast) var(--transition-timing-function),
+            color var(--transition-duration-fast) var(--transition-timing-function);
+        border-radius: var(--border-radius-small);
+        text-transform: uppercase;
+        box-shadow: 3px 3px 0px var(--border-color-button);
+        /* Hard shadow in border/text color */
+    }
+
+    & button:hover,
+    & .btn:hover {
+        background-color: var(--bg-color-button-hover);
+        /* Inverted: Yellow background */
+        color: var(--bg-color-button);
+        /* Magenta text */
+        border-color: var(--bg-color-button);
+        /* Magenta border */
+        box-shadow: 3px 3px 0px var(--bg-color-button);
+    }
+
+    & button:active,
+    & .btn:active {
+        transform: translate(2px, 2px);
+        box-shadow: 1px 1px 0px var(--bg-color-button);
+        /* Reduced shadow when pressed */
+    }
+
+    & button:disabled,
+    & .btn:disabled {
+        background-color: #333;
+        color: #777;
+        border-color: #777;
+        box-shadow: none;
+        cursor: not-allowed;
+        opacity: 0.7;
+    }
+
+    /* Login Container */
+    & .login-container {
+        max-width: 500px;
+        margin: 60px auto;
+        padding: 30px;
+        border: 2px solid var(--accent-color-secondary);
+        /* Magenta border */
+        border-radius: var(--border-radius-default);
+        background-color: var(--bg-color-card);
+        /* More opaque card background */
+        box-shadow: 5px 5px 0px var(--accent-color-secondary);
+        /* Hard magenta shadow */
+    }
+
+    & .login-container h1 {
+        color: var(--accent-color-secondary);
+        /* Magenta login title */
+        /* Inherits other general h1 properties */
+    }
+
+    /* File List */
+    & .file-list-item {
+        font-family: var(--font-family-mono);
+        font-size: 0.9em;
+        padding: 5px 0px 5px 20px;
+        /* More padding for bullet */
+        color: var(--text-color-body);
+        border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        /* Faint green line */
+        position: relative;
+        /* For ::before pseudo-element */
+        /* margin-left: 10px; */
+        /* Removed if padding-left handles it */
+    }
+
+    & .file-list-item::before {
+        content: ">";
+        position: absolute;
+        left: 5px;
+        /* Adjust bullet position */
+        top: 5px;
+        color: var(--accent-color-primary);
+        /* Yellow bullet */
+        font-weight: normal;
+        /* VT323 is monospace, bold may be unnecessary */
+    }
+
+    & .file-list-item:last-child {
+        border-bottom: none;
+    }
+
+    & .file-list-item:hover {
+        background-color: rgba(0, 255, 0, 0.15);
+        /* Slightly stronger green highlight */
+        color: #ffffff;
+        /* White text on hover */
+        cursor: pointer;
+        /* Indicates clickability */
+    }
+
+    /* Home Container */
+    & .home-container {
+        /* Base styles for home-container if different from .app-wrapper */
+        /* position, width, box-sizing are likely inherited or set by HTML structure */
+        /* padding-top: 40px; */
+        /* Consider whether this is needed or handled globally */
+    }
+
+    /* Logout Button */
+    & .logout-button {
+        position: fixed;
+        top: 10px;
+        right: 10px;
+        z-index: 100;
+        background-color: var(--accent-color-primary);
+        /* Yellow background */
+        color: var(--bg-color-page);
+        /* Black text (contrast) */
+        border: 2px solid var(--bg-color-page);
+        /* Black border */
+        padding: 8px 15px;
+        font-family: var(--font-family-ui);
+        font-size: 0.8em;
+        text-transform: uppercase;
+        border-radius: var(--border-radius-small);
+        box-shadow: 3px 3px 0px var(--bg-color-page);
+        /* Black shadow */
+    }
+
+    & .logout-button:hover {
+        background-color: var(--accent-color-tertiary-retro);
+        /* Cyan background */
+        color: var(--bg-color-page);
+        border-color: var(--bg-color-page);
+        box-shadow: 3px 3px 0px var(--bg-color-page);
+    }
+
+    /* Search Form in Home */
+    & .home-container form {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        width: 100%;
+        /* Or a max-width */
+        /* margin-top: 10vh; */
+        /* Adjust according to design */
+        margin-bottom: 30px;
+        /* justify-content: center; */
+        /* If the form should be centered */
+        border: 1px dashed var(--accent-color-tertiary-retro);
+        /* Dashed cyan border */
+        padding: 15px;
+        background: rgba(0, 0, 0, 0.55);
+        /* Semi-transparent background */
+    }
+
+    /* Error Messages */
+    & .error-message,
+    /* Use this class in React */
+    & p[style*="color: red"] {
+        color: var(--accent-color-secondary) !important;
+        /* Magenta text */
+        font-family: var(--font-family-mono);
+        border: 1px solid var(--accent-color-secondary);
+        /* Magenta border */
+        padding: 10px;
+        margin-top: 15px;
+        background-color: rgba(255, 0, 255, 0.1);
+        /* Very light magenta background */
+        text-align: left;
+    }
+
+    /* Modal Styles (can inherit a lot from global theme variables) */
+    & .modal-overlay {
+        background-color: var(--modal-overlay-bg);
+        backdrop-filter: var(--modal-backdrop-blur);
+        /* No blur by default */
+        animation: retroModalFadeIn 0.2s linear forwards;
+        /* Faster animation */
+        /* Other .modal-overlay styles (position, display, z-index) are generic */
+    }
+
+    & .modal-container {
+        background-color: var(--bg-color-card);
+        color: var(--text-color-body);
+        border: 2px solid var(--border-color-default);
+        box-shadow: var(--box-shadow-modal);
+        /* Larger hard shadow */
+        border-radius: var(--border-radius-default);
+        /* No radius */
+        animation: retroModalSlideIn 0.2s linear forwards;
+        /* Other .modal-container styles (width, max-width, etc.) are generic */
+    }
+
+    & .modal-header {
+        border-bottom: 1px solid var(--border-color-default);
+        /* Other .modal-header styles are generic */
+    }
+
+    & .modal-title {
+        font-family: var(--font-family-ui);
+        color: var(--text-color-headings);
+        /* Other .modal-title styles are generic */
+    }
+
+    & .modal-close-button {
+        color: var(--text-color-body);
+        /* Other .modal-close-button styles are generic */
+    }
+
+    & .modal-close-button:hover {
+        color: var(--accent-color-secondary);
+    }
+
+    & .modal-body {
+        /* Generic styles */
+    }
+
+    & .modal-content {
+        font-family: var(--font-family-mono);
+        color: var(--text-color-input);
+        background-color: var(--bg-color-input);
+        border: 1px solid var(--border-color-input);
+        border-radius: var(--border-radius-small);
+        /* Other .modal-content styles are generic */
+    }
+
+    .theme-switcher-container {
+        /* Variables that the dropdown might use, defined within the .theme-retro scope */
+        --dropdown-label-color: var(--text-color);
+        /* Text color for the label */
+        --dropdown-bg: var(--background-color);
+        /* Background of the select element */
+        --dropdown-text-color: var(--text-color);
+        /* Text color inside the select element */
+        --dropdown-border-color: var(--text-color);
+        /* Border color of the select (e.g., green on black is very retro) */
+        --dropdown-focus-border-color: var(--color-primary);
+        /* Border color on focus (e.g., magenta) */
+        --dropdown-arrow-color: var(--text-color);
+        /* Color of the select arrow */
+
+        /* You can add padding or a border to the container if desired */
+        /* padding: 5px; */
+        /* border: 2px solid var(--dropdown-border-color); */
+        display: inline-block;
+        /* So the container fits its content */
+    }
+
+    .theme-switcher-container label[htmlFor="theme-select"],
+    label[for="theme-select"]
+
+    /* If not using the container div */
+        {
+        color: var(--dropdown-label-color);
+        font-family: var(--font-family-sans-serif);
+        /* e.g., "Press Start 2P", monospace */
+        font-size: 0.9rem;
+        /* Slightly smaller, typical for retro UIs */
+        margin-right: 8px;
+        text-transform: uppercase;
+        /* Very retro */
+        line-height: 1;
+        /* Adjust for vertical alignment with the select */
+    }
+
+    .theme-switcher-container select#theme-select,
+    select#theme-select
+
+    /* If not using the container div */
+        {
+        background-color: 'gray';
+        color: 'black';
+        border: 2px solid var(--dropdown-border-color);
+        /* Thicker border */
+        border-radius: 0;
+        /* No rounded corners, very angular */
+        padding: 6px 10px;
+        /* Adjust padding to your liking */
+        font-family: var(--font-family-sans-serif);
+        /* e.g., "Press Start 2P", monospace */
+        font-size: 0.9rem;
+        appearance: none;
+        /* Remove default browser appearance */
+        -webkit-appearance: none;
+        -moz-appearance: none;
+
+        /* Custom retro arrow (simple triangle) */
+        background-image:
+            linear-gradient(45deg, transparent 50%, var(--dropdown-arrow-color) 50%),
+            linear-gradient(135deg, var(--dropdown-arrow-color) 50%, transparent 50%);
+        background-position: calc(100% - 12px) center, calc(100% - 7px) center;
+        /* Adjust arrow position */
+        background-size: 5px 5px, 5px 5px;
+        /* Size of each part of the arrow */
+        background-repeat: no-repeat;
+        padding-right: 28px;
+        /* Space for the custom arrow */
+
+        cursor: pointer;
+        outline: none;
+        /* Remove default focus outline */
+        height: auto;
+        /* Let padding control the height */
+        line-height: normal;
+        /* Reset line-height which sometimes interferes */
+        min-width: 150px;
+        /* A minimum width so it doesn't look too small */
+    }
+
+    .theme-switcher-container select#theme-select:focus,
+    select#theme-select:focus {
+        border-color: var(--dropdown-focus-border-color);
+        /* Optional: a small "glow" or box-shadow on focus, retro style */
+        box-shadow: 0 0 0 2px var(--dropdown-focus-border-color);
+    }
+
+    .theme-switcher-container select#theme-select:disabled,
+    select#theme-select:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background-color: #555;
+        /* A dark gray for disabled state */
+        border-color: #777;
+        color: #999;
+        /* The arrow could also change color or disappear */
+        background-image:
+            linear-gradient(45deg, transparent 50%, #777 50%),
+            linear-gradient(135deg, #777 50%, transparent 50%);
+    }
+
+    .theme-switcher-container select#theme-select option,
+    select#theme-select option {
+        background-color: var(--dropdown-bg);
+        /* Background for the options */
+        color: var(--dropdown-text-color);
+        /* Text color for the options */
+        font-family: var(--font-family-sans-serif);
+    }
+
+
+    /* === Animations === */
+    @keyframes retroFadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes retroSubtleFlicker {
+
+        0%,
+        100% {
+            opacity: 1;
+        }
+
+        48% {
+            opacity: 0.95;
+        }
+
+        50% {
+            opacity: 0.9;
+        }
+
+        52% {
+            opacity: 0.95;
+        }
+    }
+
+    @keyframes retroModalFadeIn {
+        from {
+            opacity: 0;
+        }
+
+        to {
+            opacity: 1;
+        }
+    }
+
+    @keyframes retroModalSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-20px);
+        }
+
+        /* Less displacement */
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
     }
 }

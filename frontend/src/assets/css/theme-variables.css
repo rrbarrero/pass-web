@@ -1,0 +1,61 @@
+/* src/styles/theme-variables.css */
+/* Importa las fuentes una sola vez aquí, globalmente */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Ubuntu:wght@400;700&display=swap');
+
+:root {
+    /* Paleta de Colores Base (Default/Light Theme) */
+    --bg-color-page: #ffffff;
+    --bg-color-card: #ffffff;
+    /* Para contenedores como login-container, modal-container */
+    --bg-color-input: #ffffff;
+    --bg-color-button: #007bff;
+    --bg-color-button-hover: #0056b3;
+    /* Añadido para hover de botón */
+
+    --text-color-body: #333333;
+    --text-color-headings: #007bff;
+    /* Usando el acento primario para encabezados */
+    --text-color-input: #000000;
+    --text-color-button: #ffffff;
+    --text-color-link: #007bff;
+    /* Para futuros enlaces */
+    --text-color-link-hover: #0056b3;
+    /* Para futuros enlaces */
+
+    --accent-color-primary: #007bff;
+    --accent-color-secondary: #6c757d;
+    /* Un gris como secundario, puedes ajustarlo */
+
+    --border-color-default: #cccccc;
+    --border-color-input: var(--border-color-default);
+    /* Hereda o define específicamente */
+    --border-color-button: var(--accent-color-primary);
+    /* El borde del botón coincide con su color de fondo */
+
+    /* Tipografía */
+    --font-family-ui: 'Orbitron', sans-serif;
+    --font-family-content: 'Ubuntu', sans-serif;
+    --font-family-mono: 'Courier New', Courier, monospace;
+    /* Para contenido de modal, etc. */
+    --font-size-base: 1rem;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --line-height-base: 1.6;
+
+    /* Bordes y Sombras */
+    --border-radius-small: 3px;
+    --border-radius-default: 5px;
+    --box-shadow-default: 0 2px 5px rgba(0, 0, 0, 0.1);
+    --box-shadow-modal: 0 5px 15px rgba(0, 0, 0, 0.4);
+
+    /* Transiciones */
+    --transition-duration-fast: 0.2s;
+    --transition-duration-normal: 0.3s;
+    --transition-timing-function: ease;
+    --transition-timing-function-ease-out: ease-out;
+
+    /* Otros */
+    --modal-overlay-bg: rgba(0, 0, 0, 0.7);
+    --modal-backdrop-blur: 3px;
+    /* Opcional */
+}
