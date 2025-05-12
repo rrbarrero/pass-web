@@ -18,7 +18,7 @@ WebPass prioritizes security at every step:
 
 WebPass is designed to be easily extensible:
 
-- Add new **themes** with minimal effort to match your personal style or organization branding. [WIP*]
+- Add new **themes** with minimal effort to match your personal style or organization branding.
 - Built with modularity in mind, allowing future enhancements or custom features.
 
 ![alt text](docs/theme1.png)
@@ -26,7 +26,7 @@ WebPass is designed to be easily extensible:
 ![alt text](docs/theme2.png)
 (cyberpunk theme)
 
-* You can select the desired theme on frontend/.dev and rebuild frontend container. Work in progress to do it from the UI.
+* You can select the desired theme on frontend/.dev and rebuild frontend container.
 
 ## 📁 Host Requirements
 
