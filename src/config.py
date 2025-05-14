@@ -21,8 +21,6 @@ class Settings:
         "ADMIN_PASSWORD", "$2b$12$ysh25BtJwvVtrUuHxdM36.Vq8qXf3EmEc4kc0pwxakmi1KrZuxfCW"
     )  # testing
 
-    gpg_secret_passphrase: str = os.getenv("GPG_SECRET_PASSPHRASE", "testing")
-
     jwt_secret_key: str = os.getenv("JWT_SECRET_KEY", "missed jwt secret key")
     jwt_algorithm: str = os.getenv("JWT_ALGORITHM", "HS256")
     jwt_expiration: int = int(os.getenv("JWT_EXPIRATION", 30))  # 30 minutes

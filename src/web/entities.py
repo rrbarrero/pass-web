@@ -4,9 +4,10 @@ from pydantic import BaseModel, field_validator
 from config import settings
 
 
-class PassFileData(BaseModel):
+class DecryptData(BaseModel):
     fileName: str
     fullPath: str
+    gpgSecretPassphrase: str
 
     @field_validator("fileName")
     def validate_file_name(cls, v):

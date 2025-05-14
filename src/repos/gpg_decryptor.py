@@ -28,7 +28,7 @@ class GPGConfigurationError(GPGDecryptionError):
 
 
 class GPGDecryptor:
-    def __init__(self, gpg_instance: gnupg.GPG, passphrase: str):
+    def __init__(self, gpg_instance: gnupg.GPG):
         if not isinstance(gpg_instance, gnupg.GPG):
             raise TypeError("gpg_instance must be an initialized gnupg.GPG object")
 
@@ -36,10 +36,11 @@ class GPGDecryptor:
         if not self.gpg.encoding:
             self.gpg.encoding = "utf-8"
 
-        self.passphrase = passphrase
-
     def decrypt_file_to_string(
-        self, encrypted_file_path: str, encoding: str = "utf-8"
+        self,
+        encrypted_file_path: str,
+        gpg_secret_passphrase: str,
+        encoding: str = "utf-8",
     ) -> str:
         if not os.path.exists(encrypted_file_path):
             raise GPGFileNotFoundError(
@@ -48,7 +49,7 @@ class GPGDecryptor:
 
         try:
             decrypted_data = self.gpg.decrypt_file(
-                encrypted_file_path, passphrase=self.passphrase
+                fileobj_or_path=encrypted_file_path, passphrase=gpg_secret_passphrase
             )
 
             if decrypted_data.ok:

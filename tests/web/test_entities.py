@@ -1,7 +1,7 @@
 from pydantic import ValidationError
 import pytest
 from config import Environment, settings
-from web.entities import PassFileData
+from web.entities import DecryptData
 
 
 @pytest.mark.parametrize(
@@ -18,12 +18,13 @@ from web.entities import PassFileData
 def test_validate_file_name(file_name, expected_exception):
     if expected_exception:
         with pytest.raises(expected_exception):
-            PassFileData(fileName=file_name, fullPath="valid/path")
+            DecryptData(fileName=file_name, fullPath="valid/path", gpgSecretPassphrase="testing")
     else:
         assert (
-            PassFileData(
+            DecryptData(
                 fileName=file_name,
                 fullPath=f"{settings.password_store_path}valid/path",
+                gpgSecretPassphrase="testing",
             ).fileName
             == file_name
         )
@@ -42,9 +43,9 @@ def test_validate_full_path():
     for full_path, expected_exception in test_cases:
         if expected_exception:
             with pytest.raises(expected_exception):
-                PassFileData(fileName="valid-file.txt", fullPath=full_path)
+                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgSecretPassphrase="testing")
         else:
             assert (
-                PassFileData(fileName="valid-file.txt", fullPath=full_path).fullPath
+                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgSecretPassphrase="testing").fullPath
                 == full_path
             )

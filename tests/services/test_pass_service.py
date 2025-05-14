@@ -17,6 +17,6 @@ def test_get_password():
 
     file = PassFile.from_path("tests/__fixtures__/expected.txt.gpg")
 
-    current = pass_service.get_password(file)
+    current = pass_service.get_password(file=file, gpg_secret_passphrase="testing")
 
     assert current == "green!"
