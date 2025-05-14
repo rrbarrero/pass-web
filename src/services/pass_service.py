@@ -11,7 +11,7 @@ class PassService:
     def search(self, needle: str) -> list[PassFile]:
         return [PassFile.from_path(x) for x in self.file_repository.search_file(needle)]
 
-    def get_password(self, file: PassFile, gpg_secret_passphrase: str) -> str:
+    def decrypt(self, file: PassFile, gpg_secret_passphrase: str) -> str:
         return self.decryptor.decrypt_file_to_string(
             encrypted_file_path=str(file.full_path),
             gpg_secret_passphrase=gpg_secret_passphrase,

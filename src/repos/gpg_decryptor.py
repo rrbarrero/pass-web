@@ -48,6 +48,7 @@ class GPGDecryptor:
             )
 
         try:
+            print("passphrase", gpg_secret_passphrase)
             decrypted_data = self.gpg.decrypt_file(
                 fileobj_or_path=encrypted_file_path, passphrase=gpg_secret_passphrase
             )

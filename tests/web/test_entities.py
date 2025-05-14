@@ -18,13 +18,13 @@ from web.entities import DecryptData
 def test_validate_file_name(file_name, expected_exception):
     if expected_exception:
         with pytest.raises(expected_exception):
-            DecryptData(fileName=file_name, fullPath="valid/path", gpgSecretPassphrase="testing")
+            DecryptData(fileName=file_name, fullPath="valid/path", gpgPassword="testing")
     else:
         assert (
             DecryptData(
                 fileName=file_name,
                 fullPath=f"{settings.password_store_path}valid/path",
-                gpgSecretPassphrase="testing",
+                gpgPassword="testing",
             ).fileName
             == file_name
         )
@@ -43,9 +43,9 @@ def test_validate_full_path():
     for full_path, expected_exception in test_cases:
         if expected_exception:
             with pytest.raises(expected_exception):
-                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgSecretPassphrase="testing")
+                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgPassword="testing")
         else:
             assert (
-                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgSecretPassphrase="testing").fullPath
+                DecryptData(fileName="valid-file.txt", fullPath=full_path, gpgPassword="testing").fullPath
                 == full_path
             )

@@ -7,7 +7,7 @@ from config import settings
 class DecryptData(BaseModel):
     fileName: str
     fullPath: str
-    gpgSecretPassphrase: str
+    gpgPassword: str
 
     @field_validator("fileName")
     def validate_file_name(cls, v):

@@ -2,7 +2,17 @@ import { PassFile } from "../domain/passFile";
 
 export interface FileRepositoryIface {
   searchFile(fileName: string, token: string | null): Promise<PassFile[]>;
-  decryptFile(passFile: PassFile, token: string | null): Promise<string>;
+  decryptFile(
+    passFile: PassFile,
+    token: string | null,
+    gpgPassword: string | null
+  ): Promise<string>;
+}
+
+export interface SpyParameters {
+  fileName: string;
+  fullPath: string;
+  gpgPassword: string | null;
 }
 
 export class FakeFileRepository implements FileRepositoryIface {
@@ -10,7 +20,7 @@ export class FakeFileRepository implements FileRepositoryIface {
     { fileName: "file.ext.gpg", fullPath: "/bla/ciao/hola/file.ext.gpg" },
     { fileName: "other.bat.gpg", fullPath: "/bla/hola/ciao/other.bat.gpg" },
   ];
-  parameters: PassFile | null = null;
+  parameters: SpyParameters | null = null;
 
   constructor(paths?: PassFile[]) {
     if (paths !== undefined) {
@@ -32,10 +42,10 @@ export class FakeFileRepository implements FileRepositoryIface {
 
   async decryptFile(
     passFile: PassFile,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _token: string | null
+    _token: string | null,
+    gpgPassword: string | null
   ): Promise<string> {
-    this.parameters = passFile;
+    this.parameters = { ...passFile, gpgPassword };
     await new Promise((resolve) => setTimeout(resolve, 500));
     const fileExists = this.files.some((f) => f === passFile);
     if (!fileExists) {

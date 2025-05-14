@@ -5,3 +5,5 @@
 - [x] Add git pull to the install.sh
 - [ ] Pass store refresh mechanism
 - [x] Doker-compose in the install.sh
+- [x] Move master pass to the front
+- [ ] e2e tests

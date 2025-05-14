@@ -60,9 +60,9 @@ async def decrypt_file(
 ) -> dict[str, str]:
     try:
         return {
-            "content": pass_service.get_password(
+            "content": pass_service.decrypt(
                 file=PassFile.from_path(decrypt_data.fullPath),
-                gpg_secret_passphrase=decrypt_data.gpgSecretPassphrase,
+                gpg_secret_passphrase=decrypt_data.gpgPassword,
             )
         }
     except GPGFileNotFoundError:
