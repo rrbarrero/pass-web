@@ -1,5 +1,6 @@
 import React, { useState, FormEvent } from "react";
 import { GpgPasswordModalProps } from "./Home";
+import "../assets/css/gpg-password-modal.css";
 
 export const GpgPasswordModal: React.FC<GpgPasswordModalProps> = ({
   isOpen,
