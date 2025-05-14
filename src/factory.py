@@ -6,12 +6,11 @@ from config import settings
 def create_gpg_decryptor() -> GPGDecryptor:
     return GPGDecryptor(
         gpg_instance=create_gpg_instance(),
-        passphrase=settings.gpg_secret_passphrase,
     )
 
 
 def decryptor_for_testing() -> GPGDecryptor:
-    return GPGDecryptor(create_gpg_instance(str(settings.fixtures_path)), "testing")
+    return GPGDecryptor(create_gpg_instance(str(settings.fixtures_path)))
 
 
 def create_pass_file_repository() -> PassFileRepository:

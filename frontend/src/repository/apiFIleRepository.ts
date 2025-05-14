@@ -102,12 +102,19 @@ export class ApiFileRepository implements FileRepositoryIface {
     }
   }
 
-  async decryptFile(passFile: PassFile, token: string | null): Promise<string> {
+  async decryptFile(
+    passFile: PassFile,
+    token: string | null,
+    gpgPassword: string | null
+  ): Promise<string> {
     if (!token) {
       throw new Error("Authentication token is required for decrypting files.");
     }
     if (!passFile) {
       throw new Error("File path is required for decryption.");
+    }
+    if (!gpgPassword) {
+      throw new Error("GPG password is required for decryption.");
     }
 
     const url = `${this.apiUrl}/decrypt`;
@@ -123,7 +130,7 @@ export class ApiFileRepository implements FileRepositoryIface {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
-        body: JSON.stringify(passFile),
+        body: JSON.stringify({ ...passFile, gpgPassword }),
       });
 
       if (!response.ok) {

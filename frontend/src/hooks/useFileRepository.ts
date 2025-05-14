@@ -52,7 +52,7 @@ const useFileRepository = () => {
   );
 
   const decryptFile = useCallback(
-    async (passFile: PassFile) => {
+    async (passFile: PassFile, gpgPassword: string) => {
       // Renamed from fileName to filePath for clarity
       if (!repository) {
         // ... (rest of check)
@@ -68,7 +68,11 @@ const useFileRepository = () => {
       setFileContent(null);
       try {
         // Pass the token to the repository method
-        const result = await repository.decryptFile(passFile, token);
+        const result = await repository.decryptFile(
+          passFile,
+          token,
+          gpgPassword
+        );
         setFileContent(result);
       } catch (err) {
         console.error("useFileRepository: Error during decryptFile", err);
@@ -90,6 +94,10 @@ const useFileRepository = () => {
     setError(null);
   }, []);
 
+  const clearError = useCallback(() => {
+    setError(null);
+  }, []);
+
   return {
     filesFound,
     searchFile,
@@ -98,6 +106,7 @@ const useFileRepository = () => {
     clearFileContent,
     isLoading,
     error,
+    clearError,
   };
 };
 

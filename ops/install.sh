@@ -69,7 +69,6 @@ generate_config() {
         ["ENVIRONMENT"]='prod'
         ["ADMIN_USERNAME"]='admin'
         ["ADMIN_PASSWORD_PLAIN"]='testing'
-        ["GPG_SECRET_PASSPHRASE"]='testing'
         ["JWT_SECRET_KEY"]=''
         ["JWT_ALGORITHM"]='HS256'
         ["JWT_EXPIRATION"]='30'
@@ -149,8 +148,6 @@ generate_config() {
     echo "ADMIN_PASSWORD='${ADMIN_HASH}'" >> "$output_file_backend"
     echo "" >> "$output_file_backend"
 
-    echo "# GPG" >> "$output_file_backend"
-    prompt_variable "GPG_SECRET_PASSPHRASE" "" "$output_file_backend"
     echo "# JWT" >> "$output_file_backend"
     prompt_variable "JWT_SECRET_KEY" "## Generate with 'openssl rand -hex 32' or accept auto-generation." "$output_file_backend"
     prompt_variable "JWT_ALGORITHM" "" "$output_file_backend"

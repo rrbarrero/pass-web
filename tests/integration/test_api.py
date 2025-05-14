@@ -64,6 +64,7 @@ def test_decrypt_file(client: TestClient) -> None:
         json={
             "fileName": "expected.txt.gpg",
             "fullPath": str(settings.fixtures_path / "expected.txt.gpg"),
+            "gpgPassword": "testing",
         },
     )
 
@@ -80,6 +81,7 @@ def test_decrypt_without_login():
         json={
             "file_name": "expected.txt.gpg",
             "full_path": str(settings.fixtures_path / "expected.txt.gpg"),
+            "gpgPassword": "testing",
         },
     )
 
@@ -92,6 +94,7 @@ def test_file_not_found(client: TestClient) -> None:
         json={
             "fileName": "not_found.txt.gpg",
             "fullPath": str(settings.fixtures_path / "not_found.txt.gpg"),
+            "gpgPassword": "testing",
         },
     )
 

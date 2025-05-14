@@ -11,7 +11,7 @@ from web.adapters import FilesUiAdapter
 from web.auth import Token, create_access_token, get_current_user, verify_password
 
 from config import settings
-from web.entities import PassFileData
+from web.entities import DecryptData
 
 api_router = APIRouter()
 
@@ -54,12 +54,17 @@ async def search_file(
 
 @api_router.post("/decrypt")
 async def decrypt_file(
-    file: PassFileData,
+    decrypt_data: DecryptData,
     _: Annotated[str, Depends(get_current_user)],
     pass_service: Annotated[PassService, Depends(create_pass_service_with)],
 ) -> dict[str, str]:
     try:
-        return {"content": pass_service.get_password(PassFile.from_path(file.fullPath))}
+        return {
+            "content": pass_service.decrypt(
+                file=PassFile.from_path(decrypt_data.fullPath),
+                gpg_secret_passphrase=decrypt_data.gpgPassword,
+            )
+        }
     except GPGFileNotFoundError:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
