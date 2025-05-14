@@ -14,6 +14,19 @@ WebPass prioritizes security at every step:
 - **JWT (JSON Web Tokens)** for user authentication and session management.
 - **GPG** integration to maintain full compatibility with `pass`.
 
+---
+
+🚨 **IMPORTANT SECURITY NOTICE: USE HTTPS** 🚨
+
+For any production or even personal use where WebPass is accessible over a network (including `localhost` if other users or processes on your machine could intercept traffic, or any non-localhost access), **it is STRONGLY RECOMMENDED to deploy WebPass behind a reverse proxy configured with HTTPS (SSL/TLS).**
+
+- **Why?** Without HTTPS, your login credentials (username/password for WebPass) and the GPG passphrase (if entered in the frontend) will be transmitted in **plain text** between your browser and the WebPass backend. This makes them vulnerable to interception by anyone.
+- **How?** Configure a web server like Nginx, Caddy, or Apache as a reverse proxy to handle incoming HTTPS connections, terminate SSL/TLS, and then forward the requests to WebPass (which can then run on HTTP locally on the server). Services like Let's Encrypt offer free SSL certificates.
+
+**Never expose WebPass directly to the internet or an untrusted network over plain HTTP if you are concerned about the security of your credentials.**
+
+---
+
 ## 🎨 Extensible and Themed
 
 WebPass is designed to be easily extensible:
