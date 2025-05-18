@@ -70,3 +70,5 @@ This project is under active development. Expect rapid iterations, breaking chan
 
 📄 Disclaimer
 This software is provided without any warranty. You are solely responsible for how you use it. Make sure you understand the implications of exposing password management to a web interface.
+
+📄 License: GNU GPLv3
