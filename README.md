@@ -5,7 +5,7 @@
 ![alt text](docs/theme0.png)
 (default theme)
 
-> ⚠️ This project is a work in progress and is provided as-is. Use at your own risk. I am not responsible for any damage or data loss caused by the usage of this application.
+> ⚠️ This project is provided as-is. Use at your own risk. I am not responsible for any damage or data loss caused by the usage of this application.
 
 ## 🔐 Focus on Security
 
@@ -13,6 +13,8 @@ WebPass prioritizes security at every step:
 
 - **JWT (JSON Web Tokens)** for user authentication and session management.
 - **GPG** integration to maintain full compatibility with `pass`.
+- **Crucially, the GPG master password is never saved or cached at any time or location by WebPass.** It is used only temporarily during the decryption process.
+
 
 ---
 
